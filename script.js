@@ -201,7 +201,7 @@ function arrayOfMultiples2(num, length) {
   return [...Array(length)].map((_, i) => num * (i + 1));
 }
 
-console.log(arrayOfMultiples2(7, 5));
+// console.log(arrayOfMultiples2(7, 5));
 
 // CHALLENGE 10
 
@@ -231,6 +231,43 @@ function ascDesNone(arr, str = "None") {
   return arr;
 }
 
-console.log(ascDesNone([4, 3, 2, 1], "Asc"));
-console.log(ascDesNone([7, 8, 11, 66], "Des"));
-console.log(ascDesNone([1, 5, 2, 3, 4], "None"));
+// console.log(ascDesNone([4, 3, 2, 1], "Asc"));
+// console.log(ascDesNone([7, 8, 11, 66], "Des"));
+// console.log(ascDesNone([1, 5, 2, 3, 4], "None"));
+
+// CHALLENGE 11
+// Create a function that counts the integer's number of digits.
+
+// Examples
+// count(318) ➞ 3
+
+// count(-92563) ➞ 5
+
+// count(4666) ➞ 4
+
+// count(-314890) ➞ 6
+
+// count(654321) ➞ 6
+
+// count(638476) ➞ 6
+// Notes
+// For an added challenge, try to solve this without using strings.
+// Optionally, you can solve this via a recursive approach.
+// A recursive version of this challenge can be found via this link.
+function count(n) {
+  return ("" + n).length;
+}
+// console.log(count(318));
+// console.log(count(638476));
+
+function count2(n) {
+  let number = Math.abs(n);
+  let counter = 1;
+  let result = 0;
+  do {
+    result = result + 1;
+    counter = counter * 10;
+  } while (counter <= number);
+
+  return result;
+}
