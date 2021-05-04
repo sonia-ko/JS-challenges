@@ -271,3 +271,130 @@ function count2(n) {
 
   return result;
 }
+
+// CHALLENGE 12
+
+// Create a function that returns true if all parameters are truthy, and false otherwise.
+
+// Examples
+// allTruthy(true, true, true) ➞ true
+
+// allTruthy(true, false, true) ➞ false
+
+// allTruthy(5, 4, 3, 2, 1, 0) ➞ false
+
+function allTruthy(...arg) {
+  return arg.every((val) => val);
+}
+
+// console.log(allTruthy(true, false, true));
+// console.log(allTruthy(5, 4, 3, 2, 1, 0));
+// console.log(allTruthy(true, true, true));
+
+// CHALLENGE 13
+
+// You're given a string of words. You need to find the word "Nemo", and return a string like this: "I found Nemo at [the order of the word you find nemo]!".
+
+// If you can't find Nemo, return "I can't find Nemo :(".
+
+// Examples
+// findNemo("I am finding Nemo !") ➞ "I found Nemo at 4!"
+
+// findNemo("Nemo is me") ➞ "I found Nemo at 1!"
+
+// findNemo("I Nemo am") ➞ "I found Nemo at 2!"
+
+//! , ? . are always separated from the last word.
+// Nemo will always look like Nemo, and not NeMo or other capital variations.
+// Nemo's, or anything that says Nemo with something behind it, doesn't count as Finding Nemo.
+// If there are multiple Nemo's in the sentence, only return for the first one.
+
+function findNemo(str) {
+  let splitters = [" ", "!", "?", ",", "."];
+  let currentWord = "";
+  let arr = [];
+  for (const symb of str) {
+    if (splitters.includes(symb)) {
+      if (currentWord !== "") {
+        arr.push(currentWord);
+        currentWord = "";
+      }
+    } else {
+      currentWord = currentWord + symb;
+    }
+  }
+  if (currentWord !== "") {
+    arr.push(currentWord);
+  }
+
+  if (arr.includes("Nemo")) {
+    return `I found Nemo at ${arr.indexOf("Nemo") + 1}!`;
+  } else {
+    return `I can't find Nemo :(`;
+  }
+}
+
+// findNemo = a => {
+//   b = a.split(" ").indexOf("Nemo") + 1
+//   return b ? `I found Nemo at ${b}!` : "I can't find Nemo :("
+// }
+
+// console.log(findNemo("I Nemo am"));
+// console.log(findNemo("Nemo is me"));
+// console.log(findNemo("I am finding Nemo !"));
+// console.log(findNemo("What am I finding???"));
+// console.log(findNemo("What am I finding Nemo's???"));
+
+// CHALLENGE  14
+
+// Create a function that takes in an array (slot machine outcome) and returns true if all elements in the array are identical, and false otherwise. The array will contain 4 elements.
+
+// Examples
+// testJackpot(["@", "@", "@", "@"]) ➞ true
+
+// testJackpot(["abc", "abc", "abc", "abc"]) ➞ true
+
+// testJackpot(["SS", "SS", "SS", "SS"]) ➞ true
+
+// testJackpot(["&&", "&", "&&&", "&&&&"]) ➞ false
+
+// testJackpot(["SS", "SS", "SS", "Ss"]) ➞ false
+
+function testJackpot(arr) {
+  return arr.every((el) => el === arr[0]);
+}
+// console.log(testJackpot(["&&", "&", "&&&", "&&&&"]));
+// console.log(testJackpot(["SS", "SS", "SS", "SS"]));
+
+// CHALLENGE 15
+
+// A man has n number of apples. If he eats a percentage p of the apples (if apples are available), his children will share the remainder of the apples. Create a function to determine the number of whole apples his children got. If his children did not get any apples, return "The children didn't get any apples".
+// getNumberOfApples(10, "90%") ➞ 1
+// getNumberOfApples(25, "10%") ➞ 22
+// getNumberOfApples(0, "10%") ➞ "The children didn't get any apples"
+
+const getNumberOfApples = (n, p) =>
+  Math.floor(n - (n / 100) * parseInt(p)) ||
+  "The children didn't get any apples";
+
+// console.log(getNumberOfApples(10, "90%"));
+// console.log(getNumberOfApples(25, "10%"));
+// console.log(getNumberOfApples(0, "10%"));
+
+// CHALLENGE 16
+
+// Arrays can be mixed with various types. Your task for this challenge is to sum all the number elements in the given array. Create a function that takes an array and returns the sum of all numbers in the array.
+
+//numbersSum([1, 2, "13", "4", "645"]) ➞ 3
+// numbersSum([true, false, "123", "75"]) ➞ 0
+// numbersSum([1, 2, 3, 4, 5, true]) ➞ 15
+
+function numbersSum(arr) {
+  return arr
+    .filter((el) => typeof el === "number")
+    .reduce((acc, el) => acc + el, 0);
+}
+
+// console.log(numbersSum([1, 2, "13", "4", "645"]));
+// console.log(numbersSum([true, false, "123", "75"]));
+// console.log(numbersSum([1, 2, 3, 4, 5, true]));
