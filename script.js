@@ -398,3 +398,180 @@ function numbersSum(arr) {
 // console.log(numbersSum([1, 2, "13", "4", "645"]));
 // console.log(numbersSum([true, false, "123", "75"]));
 // console.log(numbersSum([1, 2, 3, 4, 5, true]));
+
+// CHALLENGE 17
+
+// Create a function that takes an array of numbers and returns the second largest number.
+
+// Examples
+// secondLargest([10, 40, 30, 20, 50]) ➞ 40
+
+// secondLargest([25, 143, 89, 13, 105]) ➞ 105
+
+// secondLargest([54, 23, 11, 17, 10]) ➞ 23
+
+function secondLargest(arr) {
+  const newArr = arr.sort((a, b) => b - a);
+  return newArr[1];
+}
+console.log(secondLargest([10, 40, 30, 20, 50]));
+console.log(secondLargest([25, 143, 89, 13, 105]));
+console.log(secondLargest([54, 23, 11, 17, 10]));
+
+// CHALLENGE 18
+
+// Create a function that takes two numbers and a mathematical operator + - / * and will perform a calculation with the given numbers.
+
+// Examples
+// calculator(2, "+", 2) ➞ 4
+
+// calculator(2, "*", 2) ➞ 4
+
+// calculator(4, "/", 2) ➞ 2
+// Notes
+// If the input tries to divide by 0, return: "Can't divide by 0!"
+
+function calculator(num1, operator, num2) {
+  if (operator === "/" && num2 === 0) {
+    return `Can't divide by 0!`;
+  } else {
+    switch (operator) {
+      case "+":
+        return num1 + num2;
+        break;
+      case "-":
+        return num1 - num2;
+        break;
+      case "*":
+        return num1 * num2;
+        break;
+      case "/":
+        return num1 / num2;
+        break;
+      default:
+        return `${operator} is not a valid operator. Please choose between ', *, - or +`;
+    }
+  }
+}
+
+// console.log(calculator(3, "+", 3));
+// console.log(calculator(2, "*", 5));
+// console.log(calculator(9, "/", 3));
+// console.log(calculator(9, "/", 0));
+// console.log(calculator(9, "g", 0));
+
+// CHALLLENGE 19
+
+// the previous challenge with OOP
+
+class BinaryOperator {
+  constructor(operator) {
+    this.operator = operator;
+  }
+  calculate(num1, num2) {
+    this.num1 = num1;
+    +6;
+    this.num2 = num2;
+
+    if (this.operator === "/" && num2 === 0) {
+      return `Can't divide by 0!`;
+    } else {
+      switch (this.operator) {
+        case "+":
+          return num1 + num2;
+          break;
+        case "-":
+          return num1 - num2;
+          break;
+        case "*":
+          return num1 * num2;
+          break;
+        case "/":
+          return num1 / num2;
+          break;
+        default:
+          return `${this.operator} is not a valid operator. Please choose between ', *, - or +`;
+      }
+    }
+  }
+}
+
+const addExp = new BinaryOperator("+");
+const multiplyExp = new BinaryOperator("*");
+const divideExp = new BinaryOperator("/");
+const substractExp = new BinaryOperator("-");
+
+// console.log(substractExp.calculate(2, 3));
+// console.log(addExp.calculate(2, 3));
+// console.log(divideExp.calculate(10, 2));
+// console.log(multiplyExp.calculate(10, 2));
+
+// CHALLENGE 20
+
+// Create a function that moves all capital letters to the front of a word.
+
+// Examples
+// capToFront("hApPy") ➞ "APhpy"
+
+// capToFront("moveMENT") ➞ "MENTmove"
+
+// capToFront("shOrtCAKE") ➞ "OCAKEshrt"
+
+function capToFront(str) {
+  let uppercases = [];
+  let lowercases = [];
+  for (const letter of str) {
+    if (letter === letter.toUpperCase()) {
+      uppercases.push(letter);
+    } else {
+      lowercases.push(letter);
+    }
+  }
+  return uppercases.concat(lowercases).join("");
+}
+
+// console.log(capToFront("moveMENT"));
+// console.log(capToFront("hApPy"));
+
+// CHALLENGE 21
+
+// Create a function that takes in a number as a string n and returns the number without trailing and leading zeros.
+
+// Trailing Zeros are the zeros after a decimal point which don't affect the value (e.g. the last three zeros in 3.4000 and 3.04000).
+// Leading Zeros are the zeros before a whole number which don't affect the value (e.g. the first three zeros in 000234 and 000230).
+// Examples
+// removeLeadingTrailing("230.000") ➞ "230"
+
+// removeLeadingTrailing("00402") ➞ "402"
+
+// removeLeadingTrailing("03.1400") ➞ "3.14"
+
+// removeLeadingTrailing("30") ➞ "30"
+// Notes
+// Return a string.
+// If you get a number with .0 on the end, return the integer value (e.g. return "4" rather than "4.0").
+// If the number is 0, 0.0, 000, 00.00, etc... return "0".
+function removeLeadingTrailing(str) {
+  if (Number.isInteger(Number(str))) {
+    return `${Math.trunc(Number(str))}`;
+  } else {
+    let arr = str.split("");
+    do {
+      if (arr[0] === "0") {
+        if (arr[1] !== ".") {
+          arr.shift();
+        }
+      }
+
+      if (arr[arr.length - 1] === "0") {
+        arr.pop();
+      }
+    } while ((arr[0] === "0" && arr[1] !== ".") || arr[arr.length - 1] === "0");
+    return arr.join("");
+  }
+}
+
+console.log(removeLeadingTrailing("30"));
+console.log(removeLeadingTrailing("03.1400"));
+console.log(removeLeadingTrailing("00402"));
+console.log(removeLeadingTrailing("0.0402"));
